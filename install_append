@@ -1,0 +1,3 @@
+# shell completion for bash
+install -dm 0755 %{buildroot}/usr/share/bash-completion/completions
+install -m0644 ./target/release/build/lsd-*/out/lsd.bash %{buildroot}/usr/share/bash-completion/completions/lsd
