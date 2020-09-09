@@ -6,15 +6,18 @@
 Name     : lsd
 Version  : 0.17.0
 Release  : 1
-URL      : file:///insilications/build/clearlinux/packages/lsd/lsd-0.17.0.zip
-Source0  : file:///insilications/build/clearlinux/packages/lsd/lsd-0.17.0.zip
+URL      : file:///insilications/build/clearlinux/packages/lsd/lsd-0.17.0.tar.gz
+Source0  : file:///insilications/build/clearlinux/packages/lsd/lsd-0.17.0.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
 Requires: lsd-bin = %{version}-%{release}
 Requires: lsd-data = %{version}-%{release}
-Requires: time
 BuildRequires : rustc
+BuildRequires : rustc-bin
+BuildRequires : rustc-data
+BuildRequires : rustc-dev
+BuildRequires : rustc-staticdev
 BuildRequires : time
 # Suppress stripping binaries
 %define __strip /bin/true
@@ -22,8 +25,11 @@ BuildRequires : time
 
 %description
 # LSD (LSDeluxe)
-[![license](http://img.shields.io/badge/license-Apache%20v2-orange.svg)](https://raw.githubusercontent.com/Peltoche/ical-rs/master/LICENSE)
+[![license](http://img.shields.io/badge/license-Apache%20v2-blue.svg)](https://raw.githubusercontent.com/Peltoche/lsd/master/LICENSE)
 [![Latest version](https://img.shields.io/crates/v/lsd.svg)](https://crates.io/crates/lsd)
+[![build](https://github.com/Peltoche/lsd/workflows/CICD/badge.svg)](https://github.com/Peltoche/lsd/actions)
+[![codecov](https://codecov.io/gh/Peltoche/lsd/branch/master/graph/badge.svg)](https://codecov.io/gh/Peltoche/lsd)
+[![versions](https://img.shields.io/repology/repositories/lsd)](https://repology.org/project/lsd/versions)
 
 %package bin
 Summary: bin components for the lsd package.
@@ -43,19 +49,22 @@ data components for the lsd package.
 
 
 %prep
-%setup -q -n lsd-0.17.0
-cd %{_builddir}/lsd-0.17.0
+%setup -q -n lsd
+cd %{_builddir}/lsd
 
 %build
 unset http_proxy
 unset https_proxy
 unset no_proxy
+export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
 RUSTFLAGS="-C target-cpu=native"
-cargo update
+export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
+cargo update --verbose
 
 %install
 RUSTFLAGS="-C target-cpu=native"
-RUSTFLAGS="-C target-cpu=native" cargo install --no-track --all-features --path . --root %{buildroot}/usr/
+export SSL_CERT_FILE=/var/cache/ca-certs/anchors/ca-certificates.crt
+RUSTFLAGS="-C target-cpu=native" cargo install --verbose --no-track --path . --root %{buildroot}/usr/
 ## install_append content
 # shell completion for bash
 install -dm 0755 %{buildroot}/usr/share/bash-completion/completions

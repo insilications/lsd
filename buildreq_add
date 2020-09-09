@@ -1,2 +1,8 @@
 # This file contains additional build requirements that did not get
 # picked up automatically. One name per line, no whitespace.
+rustc
+rustc-bin
+rustc-dev
+rustc-staticdev
+rustc-data
+time
