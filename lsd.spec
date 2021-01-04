@@ -4,10 +4,10 @@
 #
 %define keepstatic 1
 Name     : lsd
-Version  : 0.17.0
-Release  : 1
-URL      : file:///insilications/build/clearlinux/packages/lsd/lsd-0.17.0.tar.gz
-Source0  : file:///insilications/build/clearlinux/packages/lsd/lsd-0.17.0.tar.gz
+Version  : 0.19.0
+Release  : 2
+URL      : file:///insilications/build/clearlinux/packages/lsd/lsd-0.19.0.tar.gz
+Source0  : file:///insilications/build/clearlinux/packages/lsd/lsd-0.19.0.tar.gz
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : GPL-2.0
