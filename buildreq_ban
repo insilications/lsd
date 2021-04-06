@@ -1,18 +1,2 @@
 # This file contains build requirements that get picked up but are
 # undesirable. One entry per line, no whitespace.
-ansi_term
-chrono-humanize
-clap
-globset
-libc
-lscolors
-term_grid
-terminal_size
-unicode-width
-wild
-dirs
-human-sort
-serde
-serde_yaml
-xdg
-yaml-rust
